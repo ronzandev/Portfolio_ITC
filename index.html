@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #fff;
+            background: 
+                /*fixed linear-gradient(
+                  #f1d23a,
+                  #1d23a 6px,
+                  transparent 6px,
+                  transparent), */
+                fixed linear-gradient(
+                  transparent, 
+                  #070707 70%),
+                fixed repeating-linear-gradient(
+                  #212121,
+                  #212121 1px,
+                  transparent 1px,
+                  transparent 40px),
+                fixed repeating-linear-gradient(
+                  to right,
+                 #212121,
+                 #212121 1px,
+                 transparent 1px,
+                 transparent 40px) #070707;
+            padding: 3rem 5rem;
+            min-height: 00vh;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 50px 120px;
+            background: #212324;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            font-size: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 1000;
+            padding-right: 50px;
+        }
+        nav a {
+            font-size: 25px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 35px;
+            transition: .3s;
+        }
+        nav a:hover,
+        nav a.active {
+            color:#a4f0d5ad
+        }
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit), minmax(auto-fit, 1fr);
+            gap: 1rem;
+            margin-top: 5rem;
+        }
+        .box {
+            top: 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 12rem;
+            text-align: center;
+            display: grid;
+            grid-template-rows: subgrid;
+        }
+        .box h1 {
+            font-family: sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            padding: 0;
+            margin-top: 0; /* Space below the h1 */
+            color: #b2f8e0fa;
+        }   
+
+        .box p {
+            font-family: sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0;
+            margin-top: 5rem; /* Space above the paragraph */
+            color: #b2f8e0fa;
+        }
+
+
+        .circle {
+            margin: 0;
+            position: relative;
+            width: 100px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            outline: 30px solid rgba(0, 0, 0, 0.35);
+            outline-offset: -16px;
+        }
+        .circle img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: top;
+            border-radius: inherit;
+        }
+        .circle::before,
+        .circle::after {
+            position: absolute;
+            z-index: -1;
+            content: '';
+            inset: -20px;
+            border-radius: inherit;
+            background-image: 
+                conic-gradient(#a4f0d5ad, #31725c, #a4f0d5ad, #31725c, #31725c, #a4f0d5ad);
+            animation: rotate 3s linear infinite;
+        }
+        
+        .circle::after {
+            filter: blur(2rem);
+            opacity: 0.2;
+        }
+        
+        .circle:hover::before,
+        .circle:hover::after {
+            animation-play-state: paused;
+        }
+        
+        @keyframes rotate {
+            from {
+                rotate: 0deg;   
+            }
+        
+            to {
+                rotate: 360deg;
+            }
+        }
+        .container {
+            width: 90%;
+            height: 100%;
+            padding: 10;
+            background-color: transparent;
+            margin: 100px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+            gap: 30px; /* Adds space between the boxes */
+            position: relative; /* For positioning the blur effect */
+        }
+        .box1, .box2, .box3, .box4, .box5, .box6{
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 8px;
+            box-shadow: 2px 3px 4px rgba(180, 238, 219, 0.877);
+            position: relative; /* For positioning text */
+            overflow: hidden;
+            transition: transform 1s, filter 1s; /* Smooth zoom and blur transitions */
+            margin: 0; /* Adjust spacing between boxes */
+        }
+        .box1:hover, .box2:hover, .box3:hover, .box4:hover, .box5:hover, .box6:hover{
+            transform: scale(1.1); /* Slightly increase the size */
+            filter: brightness(1.1); /* Brighten the image */
+            box-shadow: 5px 6px 10px hsla(159, 83%, 84%, 0.5); /* Add a stronger shadow */
+            z-index: 2; /* Ensure it hovers above other elements */
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* Slight overlay */
+            z-index: -1;
+            transition: backdrop-filter 1s;
+        }
+
+        .container:hover::before {
+            backdrop-filter: blur(10px); /* Background blur when hovering over any box */
+        }
+
+        .box:hover .text {
+            opacity: 1; /* Show text on hover */
+        }
+
+        .text {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6); /* Dark background for text */
+            color: white;
+            padding: 10px;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.5s; /* Smooth fade-in */
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .page-title {
+            margin-top: 20px; /* Space above the heading */
+            font-size: 2.5rem; /* Adjust size of heading */
+            font-weight: bold; /* Make heading bold */
+            text-align: center; /* Center the text */
+            color: white; /* Color for the heading */
+        }
+        .big-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .big-video {
+            width: 100%; /* Larger video */
+            object-fit: cover; /* Crop the video */
+        }
+        .social-icons a{
+            display: inline-flex;
+            justify-content: center; 
+            text-decoration: none;
+            align-items: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #ffffffa7;
+            border: 0.1rem solid #070707;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            margin: 2rem 2rem 2rem 0;
+            transition: 0.3s ease;
+            color: #1a0606;
+            align-self: center;
+        }
+        
+        .social-icons a:hover{
+            color: #fff;
+            transform: scale(1.3) translateY(-5px);
+            background-color: rgba(180, 248, 224, 0.5);
+            box-shadow: 0  0 25px rgba(180, 238, 219, 0.877);
+        }     
+        
+        footer{
+            width: 100%;
+            padding-left: 10vh; 
+            background-color: #99293f27;
+            backdrop-filter: blur(4px);
+            background: rgb(0,0,0);
+            background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgb(34, 36, 37) 94%);
+            background-attachment: fixed;
+            background-size: cover;
+            align-items: center;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a onclick="location.href='#logohere'" class="logo">Rune Creations</a>
+            <div class="circle">
+                <img src="https://github.com/ronzandev/PersonalWebsite/blob/main/ron.jpg?raw=true" alt="Profile Picture">
+            </div>
+        </div>
+        <nav>
+            <a onclick="location.href='#logohere'">Home</a>
+            <a onclick="location.href='#bhere'">Who am I?</a>
+            <a onclick="location.href='#here'">Contacts</a>
+        </nav>
+    </header>
+    <div class="wrapper">
+    <div class="box" id="logohere" style="position: relative; text-align: center; padding: 3rem; margin-top: 15rem;">
+        <h1 style="
+            font-family: sans-serif; 
+            font-size: 3rem; 
+            font-weight: 800; 
+            color: #54d1acfa; 
+            position: absolute; 
+            padding: 0;
+            top: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            margin: 0;
+        ">
+            Site Map
+        </h1>
+        <img src="https://github.com/ronzandev/PersonalWebsite/blob/main/Receive%20Product%20for%20Inspection.png?raw=true" 
+            style="display: block; margin: 2rem auto 0; max-width: 100%; height: auto;"
+        >
+    </div>
+</div>
+    
+    <div class="wrapper">
+        <div class="box" id="bhere">
+            <h1>Introduction</h1>
+            <p>I'm Ron Zandro Morante a newbie on web developing and I'm currently residing somewhere <br>
+                in Molino Cavite. Im a freshman student at The University of Perpetual Help System DALTA (UPHSD)<br>
+                and this website is a compilation of my Intro to Computing - Lab Activities.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="big-video"><a href="https://ronzandev.github.io/MyFirstBlog/" class="box box1">
+            <iframe src="https://ronzandev.github.io/MyFirstBlog/" title="My First Blog" allowfullscreen></iframe>     
+        <div class="text">My First Blog</div>
+    </a></div>
+        
+    <div class="big-video"><a href="https://ronzandev.github.io/PersonalWebsite/" class="box box2">
+            <iframe src="https://ronzandev.github.io/PersonalWebsite/" title="Personal Website" allowfullscreen></iframe> 
+        <div class="text">Personal Website</div>
+    </a></div>
+
+        <div class="big-video"><a href="https://ronzandev.github.io/NasaWeb/" class="box box3">
+            <iframe src="https://ronzandev.github.io/NasaWeb/" title="NasaWeb" allowfullscreen></iframe> 
+        <div class="text">NasaWeb</div>
+    </a></div>
+
+        <div class="big-video"><a href="https://ronzandev.github.io/Megalulu/" class="box box4">
+            <iframe src="https://ronzandev.github.io/Megalulu/" title="Megalulu E-commerce" allowfullscreen></iframe>
+    <div class="text">Megalulu E-commerce</div>
+    </a></div>
+
+        <div class="big-video"><a href="https://ronzandev.github.io/Podcast_Partnership/" class="box box5">
+            <iframe src="https://ronzandev.github.io/Podcast_Partnership/" title="Ron & Clent Podcast" allowfullscreen></iframe>
+    <div class="text">Ron & Clent Podcast</div>
+    </a></div>
+
+        <div class="big-video"><a href="https://ronzandev.github.io/Podcast_Partnership/dashboard.html" class="box box6">
+            <iframe src="https://ronzandev.github.io/Podcast_Partnership/dashboard.html" title="Dashboard" allowfullscreen></iframe>
+    <div class="text">Dashboard</div>
+    </a></div>
+    </div>
+    <div id="here">
+        <footer>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=100079120202038&mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a>
+              <a href="https://github.com/ronzandev"><i class="fa-brands fa-github"></i></a>
+              <a href="https://x.com/U2__8_"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="https://www.instagram.com/m.yuuto2/"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://www.instagram.com/m.yuuto2/"><i class="fa-brands fa-spotify"></i></a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
